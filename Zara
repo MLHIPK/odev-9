@@ -1,0 +1,92 @@
+package org.odev9;
+
+public class Zara {
+    private Map<String, Double> urunler; // Mağazadaki ürünler ve fiyatları
+
+    public GiyimMagazasi() {
+        urunler = new HashMap<>();
+
+
+// Mağazada bulunan ürünler ve fiyatları
+        urunler.put("Gömlek", 50.0);
+        urunler.put("Pantolon", 80.0);
+        urunler.put(
+
+                "Kazak", 100.0);
+        urunler.put("Etek", 70.0);
+        urunler.put(
+                u
+                "Ceket", 120.0);
+    }
+
+    // Belirtilen ürünü ve miktarını satın alır
+    public double urunSat(String urunAdi, int miktar) throws UrunBulunamadiException, StokYetersizException {
+        if (!urunler.containsKey(urunAdi)) {
+            throw new UrunBulunamadiException("Ürün bulunamadı: " + urunAdi);
+        }
+        double urunFiyati = urunler.get(urunAdi);
+        if (miktar > 0) {
+            // Stokta yeterli ürün var mı kontrol et
+            // Burada stok kontrolü yapılabilir, ancak bu örnekte stok kontrolü yapılmamıştır
+            // Stok yeterli ise satış işlemi gerçekleştirilir
+            return urunFiyati * miktar;
+        } else {
+            throw new StokYetersizException("Stokta yeterli ürün bulunmamaktadır: " + urunAdi);
+        }
+    }
+}
+
+
+package org.odev9;
+
+public class Main {
+    public static void main(String[] args) {
+        GiyimMagazasi magaza = new GiyimMagazasi();
+        try {
+            double toplamFiyat = magaza.urunSat("Gömlek", 2); // 2 adet gömlek satın al
+            System.out.println("Toplam Fiyat: " + toplamFiyat + " TL");
+        }
+
+        catch (UrunBulunamadiException | StokYetersizException e) {
+            System.err.println("Hata: " + e.getMessage());
+        }
+        try {
+            double toplamFiyat = magaza.urunSat("Kazak", 3); // 3 adet kazak satın al
+            System.out.println(
+                    System.
+                            "Toplam Fiyat: " + toplamFiyat + " TL");
+        }
+
+        catch (UrunBulunamadiException | StokYetersizException e) {
+            System.err.println(
+
+                    "Hata: " + e.getMessage());
+        }
+}
+try {
+        double toplamFiyat = magaza.urunSat("Ayakkabı", 1); // Bulunmayan bir ürünü satın al
+        System.out.println(
+
+                "Toplam Fiyat: " + toplamFiyat + " TL");
+    }
+catch (UrunBulunamadiException | StokYetersizException e) {
+        System.err.println(
+                "Hata: " + e.getMessage();
+    }
+    // Özel bir hata sınıfı - Ürün bulunamadı
+    class UrunBulunamadiException extends Exception {
+        public UrunBulunamadiException(String message) {
+
+
+            super(message);
+        }
+    }
+
+// Özel bir hata sınıfı - Stok yetersiz
+
+    class StokYetersizException extends Exception {
+        public StokYetersizException(String message) {
+            super(message);
+        }
+    }
+}
